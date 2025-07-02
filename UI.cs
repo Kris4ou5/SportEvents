@@ -9,7 +9,7 @@ namespace SportEvents
     internal class UI
     {
         public static void ShowAllEvents(List<Events> events) //показва всички събития
-        {
+        {//a
             int i = 0;
             while (i < events.Count)
             {
@@ -20,7 +20,7 @@ namespace SportEvents
                 Console.WriteLine($"Дата: {ev.Date:dd.MM.yyyy}");
                 Console.WriteLine($"Билети: {ev.TicketsAvailable}");
                 Console.WriteLine($"Цена: {ev.Price} лв.");
-
+                
                 i++;
             }
 
