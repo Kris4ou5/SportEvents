@@ -20,7 +20,7 @@ namespace SportEvents
             LoadEvents();
         }
 
-        public void Save()
+        public static void Save()
         {
             StreamWriter writer = new StreamWriter(Constants.filePath);
             using (writer)

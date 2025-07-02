@@ -77,15 +77,16 @@ namespace SportEvents
                 index = int.Parse(Console.ReadLine());
             }
             Console.WriteLine("Избери брой билети:");
-            decimal countTic = decimal.Parse(Console.ReadLine());
-            while (countTic == 0 || countTic > Data.events[index].TicketsAvailable)
+            int countTic = int.Parse(Console.ReadLine());
+            while (countTic == 0 || countTic > Data.events[index-1].TicketsAvailable)
             {
                 Console.Write("Грешен брой опитай пак:");
-                countTic = decimal.Parse(Console.ReadLine());
+                countTic = int.Parse(Console.ReadLine());
             }
             decimal res = countTic * Data.events[index].Price;
             Console.WriteLine($"цената за {countTic} билета е {res}лв.");
-            
+            Data.events[index - 1].TicketsAvailable = Data.events[index - 1].TicketsAvailable - countTic;
+            Data.Save();
 
         }
     }
