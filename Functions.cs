@@ -65,6 +65,29 @@ namespace SportEvents
 
 
         }
+
+        public void BuyTickets()
+        {
+            UI.ShowAllEvents(Data.events);
+            Console.Write($"Избери събитие от 1 до {Data.events.Count + 1}");
+            int index = int.Parse(Console.ReadLine()) ;
+            while (index  == 0 || index > Data.events.Count + 1)
+            {
+                Console.Write("Грешен номер опитай пак:");
+                index = int.Parse(Console.ReadLine());
+            }
+            Console.WriteLine("Избери брой билети:");
+            decimal countTic = decimal.Parse(Console.ReadLine());
+            while (countTic == 0 || countTic > Data.events[index].TicketsAvailable)
+            {
+                Console.Write("Грешен брой опитай пак:");
+                countTic = decimal.Parse(Console.ReadLine());
+            }
+            decimal res = countTic * Data.events[index].Price;
+            Console.WriteLine($"цената за {countTic} билета е {res}лв.");
+            
+
+        }
     }
 }
 
