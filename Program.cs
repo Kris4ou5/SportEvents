@@ -15,7 +15,7 @@ namespace SportEvents
                         
                         break;
                     case "2": //Продажба на билет
-                        Functions.BuyTicket();
+                        
                         break;
                     case "3": // проверка на наличноста на билетите
                         break;
