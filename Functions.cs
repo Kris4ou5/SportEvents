@@ -11,7 +11,7 @@ namespace SportEvents
     internal class Functions
     {
 
-        private static void AddEvent()
+        public static void AddEvent()
         {
 
        

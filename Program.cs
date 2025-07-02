@@ -12,7 +12,7 @@ namespace SportEvents
               switch(input) 
               {
                     case "1": //добавяне на събитие
-                        
+                        Functions.AddEvent();
                         break;
                     case "2": //Продажба на билет
                         
@@ -29,6 +29,6 @@ namespace SportEvents
             
             
             }
-        }
+        }   
     }
 }
