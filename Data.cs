@@ -2,12 +2,48 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace SportEvents
 {
     internal class Data
     {
-        
+        public List<Events> Events { get; private set; }
+
+        private StreamReader reader;
+        private StreamWriter writer;
+
+        public Data()
+        {
+            LoadEvents();
+        }
+
+        public void Save()
+        {
+            StreamWriter writer = new StreamWriter(Constants.filePath);
+            using (writer)
+            {
+                string jsonData = JsonSerializer.Serialize(Events);
+                writer.Write(jsonData);
+            }
+        }
+
+        private void LoadEvents()
+        {
+            Events = new List<Events>();
+            reader = new StreamReader(Constants.filePath);
+            using (reader)
+            {
+                string jsonData = reader.ReadToEnd();
+                if (!string.IsNullOrEmpty(jsonData))
+                {
+                    Events = JsonSerializer.Deserialize<List<Events>>(jsonData)!;
+                }
+            }
+        }
+
     }
+    
 }
