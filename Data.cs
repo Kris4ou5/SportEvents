@@ -10,7 +10,7 @@ namespace SportEvents
 {
     internal class Data
     {
-        public List<Events> Events { get; private set; }
+        public static List<Events> events { get; private set; }
 
         private StreamReader reader;
         private StreamWriter writer;
@@ -25,21 +25,21 @@ namespace SportEvents
             StreamWriter writer = new StreamWriter(Constants.filePath);
             using (writer)
             {
-                string jsonData = JsonSerializer.Serialize(Events);
+                string jsonData = JsonSerializer.Serialize(events);
                 writer.Write(jsonData);
             }
         }
 
         private void LoadEvents()
         {
-            Events = new List<Events>();
+            events = new List<Events>();
             reader = new StreamReader(Constants.filePath);
             using (reader)
             {
                 string jsonData = reader.ReadToEnd();
                 if (!string.IsNullOrEmpty(jsonData))
                 {
-                    Events = JsonSerializer.Deserialize<List<Events>>(jsonData)!;
+                    events = JsonSerializer.Deserialize<List<Events>>(jsonData)!;
                 }
             }
         }

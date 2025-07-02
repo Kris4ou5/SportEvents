@@ -28,5 +28,8 @@ namespace SportEvents
             TicketsAvailable = ticketsAvailable;
             Price = price;
         }
+
+      
+
     }
 }

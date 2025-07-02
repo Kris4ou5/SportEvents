@@ -1,4 +1,6 @@
-﻿namespace SportEvents
+﻿using System.Diagnostics.Metrics;
+
+namespace SportEvents
 {
     internal class Program
     {
@@ -10,8 +12,10 @@
               switch(input) 
               {
                     case "1": //добавяне на събитие
+                        
                         break;
                     case "2": //Продажба на билет
+                        Functions.BuyTicket();
                         break;
                     case "3": // проверка на наличноста на билетите
                         break;
