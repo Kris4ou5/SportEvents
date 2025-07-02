@@ -10,11 +10,7 @@ namespace SportEvents
     {
         public static void ShowAllEvents(List<Events> events) //показва всички събития
         {
-            Console.Clear();
-            foreach (var e in events)
-            {
-                Console.WriteLine(e);
-            }
+
         }
 
     }
