@@ -6,6 +6,7 @@ namespace SportEvents
     {
         static void Main(string[] args)
         {
+            
             string input;
             while ((input = Console.ReadLine()) != "x") 
             { 
@@ -15,7 +16,7 @@ namespace SportEvents
                         Functions.AddEvent();
                         break;
                     case "2": //Продажба на билет
-                        
+                        Functions.BuyTickets();
                         break;
                     case "3": // проверка на наличноста на билетите
                         break;
