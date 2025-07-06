@@ -29,12 +29,13 @@ namespace SportEvents
 
         public static void ShowAllEvents(List<Events> events) //показва всички събития
         {//a
+            Console.Clear();
             int i = 0;
             while (i < events.Count)
             {
                 ShowEventInfo(events[i]);
                 i++;
-
+                Console.WriteLine("");
             }
 
         }
@@ -44,16 +45,16 @@ namespace SportEvents
             //Гриша измисли как да свържеш евентите тоест искам да селектва всеки евент и да изписва името му примерно I е равно на 1 и изписва първия евент :)
             Console.WriteLine("Моля избери събитие:");
             int i = 1;
-            while (i == events.Count)
+            while (i <= events.Count) 
             {
                 
-                Console.WriteLine(events[i].Name);
+                Console.WriteLine($"{i}." + events[i].Name);
                 i++;
             }
-
+            
         }
 
-        public static void ShowEventInfo(Events eventi) //с този метод упростявам малко кода като просто го отделям в метод
+        public static void ShowEventInfo(Events eventi) //упростявам малко кода като просто го отделям в метод      
         {
             
             Console.WriteLine($"ID: {eventi.eventID}");
