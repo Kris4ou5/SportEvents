@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http.Json;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Xml.Linq;
 
 namespace SportEvents
 {
     internal class Functions
     {
-
+       
 
         public static void AddEvent()
         {
+            
             Console.WriteLine("--- Добавяне на ново събитие ---");
 
 
@@ -23,11 +27,11 @@ namespace SportEvents
 
 
             Console.Write("Въведете име на събитието: ");
-            string name = Console.ReadLine();
+             string name = Console.ReadLine();
 
 
             Console.Write("Въведете местоположение: ");
-            string location = Console.ReadLine();
+             string location = Console.ReadLine();
 
 
 
@@ -38,7 +42,7 @@ namespace SportEvents
 
 
             Console.Write("Въведете наличен брой билети: ");
-            int tickets = int.Parse(Console.ReadLine());
+          int tickets = int.Parse(Console.ReadLine());
             while (true)
             {
                 if (tickets >= 0)
@@ -66,6 +70,10 @@ namespace SportEvents
                     Console.WriteLine("Невалидна цена. Моля, въведете положително число или нула.");
                 }
             }
+
+            Events newevent = new Events(name, location, date, tickets, price);
+
+            Data.events.Add(newevent);
         }
            
             
