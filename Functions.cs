@@ -74,6 +74,8 @@ namespace SportEvents
             Events newevent = new Events(name, location, date, tickets, price);
 
             Data.events.Add(newevent);
+            Data.Save();
+
         }
            
             

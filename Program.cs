@@ -6,7 +6,8 @@ namespace SportEvents
     {
         static void Main(string[] args)
         {
-            
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            new Data();
             string input;
             while ((input = Console.ReadLine()) != "x") 
             { 

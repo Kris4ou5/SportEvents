@@ -8,6 +8,9 @@ namespace SportEvents
 {
     internal class UI
     {
+
+
+
         public static void ShowAllEvents(List<Events> events) //показва всички събития
         {//a
             int i = 0;
