@@ -113,6 +113,17 @@ namespace SportEvents
             Data.events[index - 1].TicketsAvailable = Data.events[index - 1].TicketsAvailable - countTic;
 
         }
+
+        public static void ShowAvailability(string eventName)
+        {
+            foreach(var e in Data.events)
+            {
+                if(e.Name == eventName)
+                {
+                    Console.WriteLine($"Броя на билетите за {e.Name} е {e.TicketsAvailable} и цената за един билет е {e.Price}");
+                }
+            }
+        }
     }
 }
 
