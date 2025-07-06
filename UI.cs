@@ -22,6 +22,7 @@ namespace SportEvents
                 Console.WriteLine($"Цена: {ev.Price} лв.");
                 
                 i++;
+
             }
 
         }

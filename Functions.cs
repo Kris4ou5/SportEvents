@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http.Json;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -70,16 +71,18 @@ namespace SportEvents
             
       
 
-        public void BuyTickets()
+        public static void  BuyTickets()
         {
             UI.ShowAllEvents(Data.events);
             Console.Write($"Избери събитие от 1 до {Data.events.Count + 1}");
             int index = int.Parse(Console.ReadLine()) ;
+
             while (index  == 0 || index > Data.events.Count + 1)
             {
                 Console.Write("Грешен номер опитай пак:");
                 index = int.Parse(Console.ReadLine());
             }
+            Console.Clear();
             Console.WriteLine("Избери брой билети:");
             int countTic = int.Parse(Console.ReadLine());
             while (countTic == 0 || countTic > Data.events[index-1].TicketsAvailable)
@@ -87,10 +90,17 @@ namespace SportEvents
                 Console.Write("Грешен брой опитай пак:");
                 countTic = int.Parse(Console.ReadLine());
             }
+            Console.Clear();
+            CalculatePrice(countTic, index);
+            Data.Save();
+
+        }
+
+        private static void  CalculatePrice(int countTic, int index)
+        {
             decimal res = countTic * Data.events[index].Price;
             Console.WriteLine($"цената за {countTic} билета е {res}лв.");
             Data.events[index - 1].TicketsAvailable = Data.events[index - 1].TicketsAvailable - countTic;
-            Data.Save();
 
         }
     }
