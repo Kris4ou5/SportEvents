@@ -8,7 +8,11 @@ namespace SportEvents
 {
     internal class UI
     {
+        public static void SelectOption()
+        {
 
+
+        }
 
 
         public static void ShowAllEvents(List<Events> events) //показва всички събития
