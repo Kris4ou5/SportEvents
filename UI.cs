@@ -32,14 +32,7 @@ namespace SportEvents
             int i = 0;
             while (i < events.Count)
             {
-                var ev = events[i];
-                Console.WriteLine($"ID: {ev.eventID}");
-                Console.WriteLine($"Име: {ev.Name}");
-                Console.WriteLine($"Местоположение: {ev.Location}");
-                Console.WriteLine($"Дата: {ev.Date:dd.MM.yyyy}");
-                Console.WriteLine($"Билети: {ev.TicketsAvailable}");
-                Console.WriteLine($"Цена: {ev.Price} лв.");
-                
+                ShowEventInfo(events[i]);
                 i++;
 
             }
@@ -54,10 +47,21 @@ namespace SportEvents
             while (i == events.Count)
             {
                 
-                Console.WriteLine(events[i]);
+                Console.WriteLine(events[i].Name);
                 i++;
             }
 
+        }
+
+        public static void ShowEventInfo(Events eventi) //с този метод упростявам малко кода като просто го отделям в метод
+        {
+            
+            Console.WriteLine($"ID: {eventi.eventID}");
+            Console.WriteLine($"Име: {eventi.Name}");
+            Console.WriteLine($"Местоположение: {eventi.Location}");
+            Console.WriteLine($"Дата: {eventi.Date:dd.MM.yyyy}");
+            Console.WriteLine($"Билети: {eventi.TicketsAvailable}");
+            Console.WriteLine($"Цена: {eventi.Price} лв.");
         }
 
 
