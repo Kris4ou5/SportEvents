@@ -46,7 +46,7 @@ namespace SportEvents
 
         }
 
-        public static void SellTickets()
+        public static void BuyTickets()
         {
 
         }
