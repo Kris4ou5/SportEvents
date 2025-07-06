@@ -35,7 +35,7 @@ namespace SportEvents
             {
                 ShowEventInfo(events[i]);
                 i++;
-                Console.WriteLine("");
+                Console.WriteLine("=======================");
             }
 
         }
@@ -43,12 +43,13 @@ namespace SportEvents
         public static void BuyTickets(List<Events> events)
         {
             //Гриша измисли как да свържеш евентите тоест искам да селектва всеки евент и да изписва името му примерно I е равно на 1 и изписва първия евент :)
+            Console.Clear();
             Console.WriteLine("Моля избери събитие:");
             int i = 1;
             while (i <= events.Count) 
             {
                 
-                Console.WriteLine($"{i}." + events[i].Name);
+                Console.WriteLine($"{i}." + events[i-1].Name);
                 i++;
             }
             

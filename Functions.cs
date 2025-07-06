@@ -83,8 +83,7 @@ namespace SportEvents
 
         public static void  BuyTickets()
         {
-            UI.ShowAllEvents(Data.events);
-            Console.Write($"Избери събитие от 1 до {Data.events.Count}");
+            UI.BuyTickets(Data.events);
             int index = int.Parse(Console.ReadLine()) ;
 
             while (index  == 0 || index > Data.events.Count + 1)
