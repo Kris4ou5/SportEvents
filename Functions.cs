@@ -84,7 +84,7 @@ namespace SportEvents
         public static void  BuyTickets()
         {
             UI.ShowAllEvents(Data.events);
-            Console.Write($"Избери събитие от 1 до {Data.events.Count + 1}");
+            Console.Write($"Избери събитие от 1 до {Data.events.Count}");
             int index = int.Parse(Console.ReadLine()) ;
 
             while (index  == 0 || index > Data.events.Count + 1)
@@ -123,7 +123,7 @@ namespace SportEvents
             {
                 if(e.Name == eventName)
                 {
-                    Console.WriteLine($"Броя на билетите за {e.Name} е {e.TicketsAvailable} и цената за един билет е {e.Price}");
+                    Console.WriteLine($"Броя на билетите за {e.Name} са {e.TicketsAvailable} и цената за един билет е {e.Price}лв.");
                 }
             }
         }
