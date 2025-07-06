@@ -114,8 +114,11 @@ namespace SportEvents
 
         }
 
-        public static void ShowAvailability(string eventName)
+        public static void ShowAvailability()
         {
+            Console.Clear();
+            Console.Write("Въведи събитие:");
+            string eventName = Console.ReadLine();
             foreach(var e in Data.events)
             {
                 if(e.Name == eventName)
