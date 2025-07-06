@@ -10,6 +10,18 @@ namespace SportEvents
     {
         public static void SelectOption()
         {
+            Console.Clear();
+            Console.WriteLine("===========================================");
+            Console.WriteLine("Приложение за управление на спортни събития");
+            Console.WriteLine("===========================================");
+            Console.WriteLine("1. Добавяне на ново спортно събитие");
+            Console.WriteLine("2. Продажба на билети за събитие");
+            Console.WriteLine("3. Проверка на наличността на билети");
+            Console.WriteLine("4. Справка за всички спортни събития");
+            Console.WriteLine("m. Menu");
+            Console.WriteLine("0. Изход");
+            Console.WriteLine("===========================================");
+            Console.Write("Изберете опция:");
 
 
         }
