@@ -97,6 +97,7 @@ namespace SportEvents
             decimal res = countTic * Data.events[index].Price;
             Console.WriteLine($"цената за {countTic} билета е {res}лв.");
             Data.events[index - 1].TicketsAvailable = Data.events[index - 1].TicketsAvailable - countTic;
+
         }
     }
 }
