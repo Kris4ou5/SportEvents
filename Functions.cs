@@ -11,60 +11,64 @@ namespace SportEvents
     internal class Functions
     {
 
+
         public static void AddEvent()
         {
-
-       
             Console.WriteLine("--- Добавяне на ново събитие ---");
+
+
+
+            // Console.WriteLine($"Автоматично генерирано ID на събитието: {eventId}"); 
+
 
             Console.Write("Въведете име на събитието: ");
             string name = Console.ReadLine();
+
 
             Console.Write("Въведете местоположение: ");
             string location = Console.ReadLine();
 
 
+
             Console.Write("Въведете дата и час (ДД.ММ.ГГГГ ЧЧ:ММ): ");
             DateTime date = DateTime.Parse(Console.ReadLine());
-            
-            
-               
-                
-            
+
+
+
 
             Console.Write("Въведете наличен брой билети: ");
             int tickets = int.Parse(Console.ReadLine());
             while (true)
             {
-                
                 if (tickets >= 0)
                 {
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("Невалиден брой билети. Моля, въведете положително число.");
+                    Console.WriteLine("Невалиден брой билети. Моля, въведете цяло положително число или нула.");
                 }
             }
+
+
 
             Console.Write("Въведете цена на билет (в ЛВ): ");
             decimal price = decimal.Parse(Console.ReadLine());
             while (true)
             {
-               
                 if (price >= 0)
                 {
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("Невалидна цена. Моля, въведете положително число.");
+                    Console.WriteLine("Невалидна цена. Моля, въведете положително число или нула.");
                 }
             }
-
-
-
         }
+           
+            
+      
 
         public void BuyTickets()
         {
