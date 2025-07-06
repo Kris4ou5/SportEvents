@@ -46,8 +46,17 @@ namespace SportEvents
 
         }
 
-        public static void BuyTickets()
+        public static void BuyTickets(List<Events> events)
         {
+            //Гриша измисли как да свържеш евентите тоест искам да селектва всеки евент и да изписва името му примерно I е равно на 1 и изписва първия евент :)
+            Console.WriteLine("Моля избери събитие:");
+            int i = 1;
+            while (i == events.Count)
+            {
+                
+                Console.WriteLine(events[i]);
+                i++;
+            }
 
         }
 
