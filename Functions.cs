@@ -112,6 +112,10 @@ namespace SportEvents
             Data.events[index - 1].TicketsAvailable = Data.events[index - 1].TicketsAvailable - countTic;
 
         }
+        public static void ConfirmPurchase()
+        {
+            
+        }
 
         public static void ShowAvailability()
         {
