@@ -124,9 +124,74 @@ namespace SportEvents
             
          }
 
-        public static void Budget(string addbalans, double balans)
+        public static void Budget()
         {
+            string addbalans;
+            double balans = 0;
             
+            Console.WriteLine($"Въведи {"add"} за да добавиш пари в сметката си.");
+            Console.WriteLine($"Въведи {"balans"} за да видеш с колко пари разполагаш.");
+            Console.WriteLine($"Въведи {"m"} за да се върнеш в Menu-то.");
+            addbalans = Console.ReadLine();
+            if (addbalans == "add")
+            {
+                while (addbalans == "m")
+                {
+                    Console.Write($"Въведи число за да добавиш в сметката си:");
+                    int number = int.Parse(Console.ReadLine());
+                    balans = balans + number;
+
+                    Console.WriteLine($"Вие успешно добавихте {number}лв. в сметката си.");
+                    Console.WriteLine($"Сега разполагата с {balans}лв.");
+                    Console.WriteLine($"Въведи {"add"} за да добавиш пари в сметката си.");
+                    Console.WriteLine($"Въведи {"m"} за да се върнеш в Menu-то.");
+                    addbalans = Console.ReadLine();
+                    if (addbalans == "add")
+                    {
+                        continue;
+                    }
+                    else if (addbalans == "m")
+                    {
+                        UI.SelectOption();
+                        break;
+
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Въвели сле грешна команда моля въведете {"add"}  или {"m"}");
+                    }
+                }
+
+            }
+            else if (addbalans == "balans")
+            {
+                Console.WriteLine($"Вашия баланс е {balans}лв");  
+                Console.WriteLine($"Въведи {"m"} за да се върнеш в Menu-то.");
+               while (addbalans == "m")
+                {
+                    addbalans = Console.ReadLine();
+                    if (addbalans == "m")
+                    {
+                        UI.SelectOption();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Въвели сте грешна команда");
+                    }
+                }
+                
+               
+            }
+            else if(addbalans == "m")
+            {
+                UI.SelectOption();
+            }
+            else
+            {
+                Console.WriteLine($"Въвели сле грешна команда моля въведете {"add"}, {"balans"}  или {"m"}");
+            }
+
+
 
         }
         public static void ShowAvailability()
