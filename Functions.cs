@@ -114,9 +114,21 @@ namespace SportEvents
         }
         public static void ConfirmPurchase()
         {
-            
-        }
+            Console.WriteLine($"Въведи{"Потвърди"} за да подвърдиш плащането или {"m"} за да се върнеш в Menu-то" );
+            string buyticket = Console.ReadLine();
+            if ( buyticket == "Потвърди" )
+            {
+                Console.WriteLine("");
+            }
 
+            
+         }
+
+        public static void Budget(string addbalans, double balans)
+        {
+            
+
+        }
         public static void ShowAvailability()
         {
             Console.Clear();

@@ -18,6 +18,7 @@ namespace SportEvents
             Console.WriteLine("2. Продажба на билети за събитие");
             Console.WriteLine("3. Проверка на наличността на билети");
             Console.WriteLine("4. Справка за всички спортни събития");
+            Console.WriteLine("5. Бюджет");
             Console.WriteLine("m. Menu");
             Console.WriteLine("0. Изход");
             Console.WriteLine("===========================================");

@@ -28,7 +28,10 @@ namespace SportEvents
                     case "4": //Справка
                         UI.ShowAllEvents(Data.events);
                         break;
-                    case "5": //kak da zatvorim programata
+                    case "5":
+                        Functions.Budget();
+                        break;
+                    case "0": //kak da zatvorim programata
                         break;
                     case "m":
                         UI.SelectOption();
