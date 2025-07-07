@@ -116,9 +116,17 @@ namespace SportEvents
         {
             Console.WriteLine($"Въведи{"Потвърди"} за да подвърдиш плащането или {"m"} за да се върнеш в Menu-то" );
             string buyticket = Console.ReadLine();
-            if ( buyticket == "Потвърди" )
+            if ( buyticket == "Потвърди" &&  >=  )
             {
-                Console.WriteLine("");
+                Console.WriteLine("Успешно извърпихте транзакция");
+            }
+            if ( buyticket == "Потвърди" &&  <= )
+            {
+                Console.WriteLine("Нямате достатъчно баланс за да извършите това плащане");
+            }
+            if( buyticket == "m")
+            {
+                UI.SelectOption();
             }
 
             
