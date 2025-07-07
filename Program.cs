@@ -23,8 +23,10 @@ namespace SportEvents
                         Functions.BuyTickets();
                         break;
                     case "3": // проверка на наличноста на билетите
-                        break;
+                        Functions.ShowAvailability(); 
+                        break;          
                     case "4": //Справка
+                        UI.ShowAllEvents(Data.events);
                         break;
                     case "5": //kak da zatvorim programata
                         break;
