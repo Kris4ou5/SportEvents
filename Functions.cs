@@ -222,9 +222,9 @@ namespace SportEvents
 
         public static void CloseProgram()
         {
-            
             Console.ReadLine();
             Environment.Exit(0);
+
         }
     }
 }
