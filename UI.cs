@@ -67,6 +67,13 @@ namespace SportEvents
             Console.WriteLine($"Цена: {eventi.Price} лв.");
         }
 
+        public static void BudgetUI()
+        {
+            Console.Clear();
+            Console.WriteLine($"Въведи {"add"} за да добавиш пари в сметката си.");
+            Console.WriteLine($"Въведи {"balans"} за да видеш с колко пари разполагаш.");
+            Console.WriteLine($"Въведи {"m"} за да се върнеш в Menu-то.");
+        }
 
 
     }

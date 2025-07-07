@@ -1,1 +1,1 @@
-[{"eventID":"954bb895-3554-44d2-b32f-ae93a70993d8","Name":"s","Location":"s","Date":"2020-02-05T13:00:00","TicketsAvailable":0,"Price":2},{"eventID":"4c8e7ee8-a501-46bc-9194-afb7d464776e","Name":"v","Location":"v","Date":"2020-02-06T13:00:00","TicketsAvailable":50,"Price":4}]
+[{"eventID":"954bb895-3554-44d2-b32f-ae93a70993d8","Name":"s","Location":"s","Date":"2020-02-05T13:00:00","TicketsAvailable":0,"Price":2},{"eventID":"4c8e7ee8-a501-46bc-9194-afb7d464776e","Name":"v","Location":"v","Date":"2020-02-06T13:00:00","TicketsAvailable":17,"Price":4}]

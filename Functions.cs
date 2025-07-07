@@ -86,7 +86,7 @@ namespace SportEvents
             UI.BuyTickets(Data.events);
             int index = int.Parse(Console.ReadLine()) ;
 
-            while (index  == 0 || index > Data.events.Count + 1)
+            while (index  == 0 || index > Data.events.Count)
             {
                 Console.Write("Грешен номер опитай пак:");
                 index = int.Parse(Console.ReadLine());
@@ -107,13 +107,13 @@ namespace SportEvents
 
         private static void  CalculatePrice(int countTic, int index)
         {
-            decimal res = countTic * Data.events[index].Price;
+            decimal res = countTic * Data.events[index-1].Price;
             Console.WriteLine($"цената за {countTic} билета е {res}лв.");
-            ConfirmPurchase(res,balans); 
+            ConfirmPurchase(res,index); 
             Data.events[index - 1].TicketsAvailable = Data.events[index - 1].TicketsAvailable - countTic;
             
         }
-        public static void ConfirmPurchase(decimal res,decimal balans) //оправих го както ми каза
+        public static void ConfirmPurchase(decimal res, int index) //оправих го както ми каза
         {
             
             Console.WriteLine($"Въведи{"Потвърди"} за да подвърдиш плащането или {"m"} за да се върнеш в Menu-то" );
@@ -121,8 +121,10 @@ namespace SportEvents
             string buyticket = Console.ReadLine();
             if ( buyticket == "Потвърди" && balans >= res ) 
             {
+                balans = balans - res; 
                 Console.WriteLine("Успешно извърпихте транзакция");
-                Console.WriteLine($"Останалият Ви баланс е {balans - res}");
+                Console.WriteLine($"Останалият Ви баланс е {balans}");
+                Console.WriteLine($"Остават още {Data.events[index - 1].TicketsAvailable} билети, които могат да бъдат закупени.");
             }
             if ( buyticket == "Потвърди" && balans <= res )
             {
@@ -139,10 +141,7 @@ namespace SportEvents
         public static void Budget()
         {
             string addbalans;
-            
-            Console.WriteLine($"Въведи {"add"} за да добавиш пари в сметката си.");
-            Console.WriteLine($"Въведи {"balans"} за да видеш с колко пари разполагаш.");
-            Console.WriteLine($"Въведи {"m"} за да се върнеш в Menu-то.");
+            UI.BudgetUI();
             addbalans = Console.ReadLine();
             if (addbalans == "add")
             {
@@ -154,7 +153,8 @@ namespace SportEvents
                     balans = balans + number;
 
                     Console.WriteLine($"Вие успешно добавихте {number}лв. в сметката си.");
-                    Console.WriteLine($"Сега разполагата с {balans}лв.");
+                    Console.WriteLine($"Сега разполагате с {balans}лв.");
+                    Console.WriteLine();
                     Console.WriteLine($"Въведи {"add"} за да добавиш пари в сметката си.");
                     Console.WriteLine($"Въведи {"m"} за да се върнеш в Menu-то.");
                     addbalans = Console.ReadLine();

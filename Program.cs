@@ -28,7 +28,7 @@ namespace SportEvents
                     case "4": //Справка
                         UI.ShowAllEvents(Data.events);
                         break;
-                    case "5":
+                    case "5": //бюджет
                         Functions.Budget();
                         break;
                     case "0": //kak da zatvorim programata
@@ -36,7 +36,7 @@ namespace SportEvents
                     case "m":
                         UI.SelectOption();
                         break;
-                    default: Console.WriteLine("Напиши цифра от 1-5 или X за да продължиш или затвориш"); break;
+                    default: Console.WriteLine("Напиши цифра от 1-5 или 0 за да продължиш или затвориш");  break;
 
                 }
 
