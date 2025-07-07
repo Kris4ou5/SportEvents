@@ -14,8 +14,8 @@ namespace SportEvents
 {
     internal class Functions
     {
-       
 
+        private static decimal balans; //тази променлива е за следене на баланса
         public static void AddEvent()
         {
             
@@ -109,18 +109,22 @@ namespace SportEvents
         {
             decimal res = countTic * Data.events[index].Price;
             Console.WriteLine($"цената за {countTic} билета е {res}лв.");
+            ConfirmPurchase(res,balans); 
             Data.events[index - 1].TicketsAvailable = Data.events[index - 1].TicketsAvailable - countTic;
-
+            
         }
-        public static void ConfirmPurchase()
+        public static void ConfirmPurchase(decimal res,decimal balans) //оправих го както ми каза
         {
+            
             Console.WriteLine($"Въведи{"Потвърди"} за да подвърдиш плащането или {"m"} за да се върнеш в Menu-то" );
+     
             string buyticket = Console.ReadLine();
-            if ( buyticket == "Потвърди" &&  >=  )
+            if ( buyticket == "Потвърди" && balans >= res ) 
             {
                 Console.WriteLine("Успешно извърпихте транзакция");
+                Console.WriteLine($"Останалият Ви баланс е {balans - res}");
             }
-            if ( buyticket == "Потвърди" &&  <= )
+            if ( buyticket == "Потвърди" && balans <= res )
             {
                 Console.WriteLine("Нямате достатъчно баланс за да извършите това плащане");
             }
@@ -135,7 +139,6 @@ namespace SportEvents
         public static void Budget()
         {
             string addbalans;
-            double balans = 0;
             
             Console.WriteLine($"Въведи {"add"} за да добавиш пари в сметката си.");
             Console.WriteLine($"Въведи {"balans"} за да видеш с колко пари разполагаш.");
@@ -143,7 +146,8 @@ namespace SportEvents
             addbalans = Console.ReadLine();
             if (addbalans == "add")
             {
-                while (addbalans == "m")
+                
+                while (addbalans == "add")
                 {
                     Console.Write($"Въведи число за да добавиш в сметката си:");
                     int number = int.Parse(Console.ReadLine());

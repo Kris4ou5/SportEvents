@@ -8,6 +8,6 @@ namespace SportEvents
 {
     public static class Constants
     {
-        public const string filePath = "../../../events.txt";
+        public const string filePath = "../../../events.txt"; //uhhh папката не се казваше както трябва за туй и смених името
     }
 }
