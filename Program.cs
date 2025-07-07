@@ -36,7 +36,7 @@ namespace SportEvents
                     case "m":
                         UI.SelectOption();
                         break;
-                    default: Console.WriteLine("Напиши цифра от 1-5 или 0 за да продължиш или затвориш");  break;
+                    default: Console.WriteLine("Напиши цифра от 1-5 или 0 за да продължиш или затвориш"); Functions.CloseProgram(); break;
 
                 }
 
