@@ -23,7 +23,7 @@ namespace SportEvents
 
 
 
-            // Console.WriteLine($"Автоматично генерирано ID на събитието: {eventId}"); 
+            //Console.WriteLine($"Автоматично генерирано ID на събитието: {eventId}"); 
 
 
             Console.Write("Въведете име на събитието: ");
@@ -222,9 +222,8 @@ namespace SportEvents
 
         public static void CloseProgram()
         {
-            Console.ReadLine();
-            Environment.Exit(0);
-
+            Console.WriteLine("Затваряне на програмата...");
+            Environment.Exit(0); // Спира приложението веднага
         }
     }
 }

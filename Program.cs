@@ -6,44 +6,50 @@ namespace SportEvents
     {
         static void Main(string[] args)
         {
+            // Задаване на кодировка на конзолата, за да се поддържат символи на кирилица
             Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            // Показване на меню с наличните опции
             UI.SelectOption();
+
+            // Инициализация на данните (предполагаемо зареждане на събития и други данни)
             new Data();
+
             string input;
 
+            // Четене на потребителски вход докато не бъде въведено "0" (изход от програмата)
             while ((input = Console.ReadLine()) != "0")
             {
-
+                // Изпълняване на действие според избраната опция от менюто
                 switch (input)
                 {
-                    case "1": //добавяне на събитие
+                    case "1": // Добавяне на ново спортно събитие
                         Functions.AddEvent();
                         break;
-                    case "2": //Продажба на билет
+                    case "2": // Продажба на билет за събитие
                         Functions.BuyTickets();
                         break;
-                    case "3": // проверка на наличноста на билетите
-                        Functions.ShowAvailability(); 
-                        break;          
-                    case "4": //Справка
+                    case "3": // Проверка на наличността на билетите за събитията
+                        Functions.ShowAvailability();
+                        break;
+                    case "4": // Показване на списък с всички събития
                         UI.ShowAllEvents(Data.events);
                         break;
-                    case "5": //бюджет
+                    case "5": // Показване на текущия бюджет (приходи от продажба на билети)
                         Functions.Budget();
                         break;
-                    case "0": //kak da zatvorim programata
+                    case "0": // Изход от програмата (не е нужно действие, while ще приключи)
                         break;
-                    case "m":
+                    case "m": // Повторно показване на менюто с опциите
                         UI.SelectOption();
                         break;
-                    default: Console.WriteLine("Напиши цифра от 1-5 или 0 за да продължиш или затвориш"); Functions.CloseProgram(); break;
-
+                    default:
+                        // При невалидна опция се показва съобщение и вероятно затваря програмата
+                        Console.WriteLine("Напиши цифра от 1-5 или 0 за да продължиш или затвориш");
+                        Functions.CloseProgram();
+                        break;
                 }
-
-
             }
         }
     }
 }
-
-
