@@ -85,11 +85,11 @@ namespace SportEvents
         {
             Console.Clear();
             Console.WriteLine("========== КУПУВАНЕ НА БИЛЕТИ ==========");
-            UI.BuyTickets(Data.events);
+            UI.BuyTickets(Data.events); 
             Console.Write("➡️ Изберете номер на събитието: ");
             int index = int.Parse(Console.ReadLine());
 
-            while (index == 0 || index > Data.events.Count)
+            while (index == 0 || index > Data.events.Count) // проверява входа
             {
                 Console.Write("❌ Грешен номер опитай пак:");
                 index = int.Parse(Console.ReadLine());
@@ -97,7 +97,7 @@ namespace SportEvents
             Console.Clear();
             Console.Write("➡️ Изберете брой билети: ");
             int countTic = int.Parse(Console.ReadLine());
-            while (countTic == 0 || countTic > Data.events[index - 1].TicketsAvailable)
+            while (countTic == 0 || countTic > Data.events[index - 1].TicketsAvailable) // проверява входа отново
             {
                 Console.Write("❌ Грешен брой опитай пак:");
                 countTic = int.Parse(Console.ReadLine());
@@ -108,15 +108,15 @@ namespace SportEvents
 
         }
 
-        private static void CalculatePrice(int countTic, int index)
+        private static void CalculatePrice(int countTic, int index) // метода изчислява цената и потвърждава покупката 
         {
             decimal res = countTic * Data.events[index - 1].Price;
             Console.WriteLine($"💰 Цената за {countTic} билета е {res}лв.");
             ConfirmPurchase(res, index);
-            Data.events[index - 1].TicketsAvailable = Data.events[index - 1].TicketsAvailable - countTic;
+            Data.events[index - 1].TicketsAvailable = Data.events[index - 1].TicketsAvailable - countTic; // изчислява как ще се промени броя на билетите при покупка и го запазва
 
         }
-        public static void ConfirmPurchase(decimal res, int index) //оправих го както ми каза
+        public static void ConfirmPurchase(decimal res, int index) // оправих го както ми каза
         {
 
             Console.WriteLine($"➡️ Въведи {"yes"} за да подвърдиш плащането или {"m"} за да се върнеш в Menu-то");
