@@ -1,236 +1,194 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Net.Http.Json;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Xml.Linq;
 
 namespace SportEvents
 {
     internal class Functions
     {
+        private static decimal balans; // Проследяване на баланса
 
-        private static decimal balans; //тази променлива е за следене на баланса
         public static void AddEvent()
         {
-            
-            Console.WriteLine("--- Добавяне на ново събитие ---");
+            PrintHeader("Добавяне на ново събитие");
 
+            Console.Write("➡️ Въведете име на събитието: ");
+            string name = Console.ReadLine();
 
+            Console.Write("➡️ Въведете местоположение: ");
+            string location = Console.ReadLine();
 
-            //Console.WriteLine($"Автоматично генерирано ID на събитието: {eventId}"); 
-
-
-            Console.Write("Въведете име на събитието: ");
-             string name = Console.ReadLine();
-
-
-            Console.Write("Въведете местоположение: ");
-             string location = Console.ReadLine();
-
-
-
-            Console.Write("Въведете дата и час (ДД.ММ.ГГГГ ЧЧ:ММ): ");
-            DateTime date = DateTime.Parse(Console.ReadLine());
-
-
-
-
-            Console.Write("Въведете наличен брой билети: ");
-          int tickets = int.Parse(Console.ReadLine());
-            while (true)
+            Console.Write("➡️ Въведете дата и час (ДД.ММ.ГГГГ ЧЧ:ММ): ");
+            DateTime date;
+            while (!DateTime.TryParse(Console.ReadLine(), out date))
             {
-                if (tickets >= 0)
-                {
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Невалиден брой билети. Моля, въведете цяло положително число или нула.");
-                }
+                Console.Write("❌ Грешен формат. Моля, опитайте отново: ");
             }
 
-
-
-            Console.Write("Въведете цена на билет (в ЛВ): ");
-            decimal price = decimal.Parse(Console.ReadLine());
-            while (true)
+            Console.Write("➡️ Въведете наличен брой билети: ");
+            int tickets;
+            while (!int.TryParse(Console.ReadLine(), out tickets) || tickets < 0)
             {
-                if (price >= 0)
-                {
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Невалидна цена. Моля, въведете положително число или нула.");
-                }
+                Console.Write("❌ Моля, въведете цяло положително число: ");
             }
 
-            Events newevent = new Events(name, location, date, tickets, price);
+            Console.Write("➡️ Въведете цена на билет (в ЛВ): ");
+            decimal price;
+            while (!decimal.TryParse(Console.ReadLine(), out price) || price < 0)
+            {
+                Console.Write("❌ Моля, въведете положително число: ");
+            }
 
-            Data.events.Add(newevent);
+            Events newEvent = new Events(name, location, date, tickets, price);
+            Data.events.Add(newEvent);
             Data.Save();
 
+            Console.WriteLine($"✅ Събитието \"{name}\" е успешно добавено!");
+            PrintFooter();
         }
-           
-            
-      
 
-        public static void  BuyTickets()
+        public static void BuyTickets()
         {
-            UI.BuyTickets(Data.events);
-            int index = int.Parse(Console.ReadLine()) ;
+            PrintHeader("Купуване на билети");
 
-            while (index  == 0 || index > Data.events.Count)
+            UI.BuyTickets(Data.events);
+            Console.Write("➡️ Изберете номер на събитието: ");
+            int index;
+            while (!int.TryParse(Console.ReadLine(), out index) || index <= 0 || index > Data.events.Count)
             {
-                Console.Write("Грешен номер опитай пак:");
-                index = int.Parse(Console.ReadLine());
+                Console.Write("❌ Грешен номер. Опитайте пак: ");
             }
-            Console.Clear();
-            Console.WriteLine("Избери брой билети:");
-            int countTic = int.Parse(Console.ReadLine());
-            while (countTic == 0 || countTic > Data.events[index-1].TicketsAvailable)
+
+            Console.Write("➡️ Изберете брой билети: ");
+            int countTic;
+            while (!int.TryParse(Console.ReadLine(), out countTic) || countTic <= 0 || countTic > Data.events[index - 1].TicketsAvailable)
             {
-                Console.Write("Грешен брой опитай пак:");
-                countTic = int.Parse(Console.ReadLine());
+                Console.Write("❌ Грешен брой. Опитайте пак: ");
             }
-            Console.Clear();
+
             CalculatePrice(countTic, index);
             Data.Save();
-
+            PrintFooter();
         }
 
-        private static void  CalculatePrice(int countTic, int index)
+        private static void CalculatePrice(int countTic, int index)
         {
-            decimal res = countTic * Data.events[index-1].Price;
-            Console.WriteLine($"цената за {countTic} билета е {res}лв.");
-            ConfirmPurchase(res,index); 
-            Data.events[index - 1].TicketsAvailable = Data.events[index - 1].TicketsAvailable - countTic;
-            
+            decimal total = countTic * Data.events[index - 1].Price;
+            Console.WriteLine($"💸 Цената за {countTic} билета е {total} лв.");
+            ConfirmPurchase(total, countTic, index);
         }
-        public static void ConfirmPurchase(decimal res, int index) //оправих го както ми каза
+
+        public static void ConfirmPurchase(decimal totalPrice, int ticketCount, int index)
         {
-            
-            Console.WriteLine($"Въведи{"Потвърди"} за да подвърдиш плащането или {"m"} за да се върнеш в Menu-то" );
-     
-            string buyticket = Console.ReadLine();
-            if ( buyticket == "Потвърди" && balans >= res ) 
+            Console.WriteLine("➡️ Въведете \"yes\" за потвърждение или \"m\" за връщане в менюто:");
+            string input = Console.ReadLine();
+
+            if (input == "yes")
             {
-                balans = balans - res; 
-                Console.WriteLine("Успешно извърпихте транзакция");
-                Console.WriteLine($"Останалият Ви баланс е {balans}");
-                Console.WriteLine($"Остават още {Data.events[index - 1].TicketsAvailable} билети, които могат да бъдат закупени.");
+                if (balans >= totalPrice)
+                {
+                    balans -= totalPrice;
+                    Data.events[index - 1].TicketsAvailable -= ticketCount;
+                    Console.WriteLine("✅ Успешно извършихте плащане!");
+                    Console.WriteLine($"💰 Останал баланс: {balans} лв.");
+                    Console.WriteLine($"🎟️ Остават {Data.events[index - 1].TicketsAvailable} билета за това събитие.");
+                }
+                else
+                {
+                    Console.WriteLine("❌ Недостатъчен баланс!");
+                }
             }
-            if ( buyticket == "Потвърди" && balans <= res )
-            {
-                Console.WriteLine("Нямате достатъчно баланс за да извършите това плащане");
-            }
-            if( buyticket == "m")
+            else if (input == "m")
             {
                 UI.SelectOption();
             }
-
-            
-         }
+            else
+            {
+                Console.WriteLine("❌ Невалидна команда.");
+            }
+        }
 
         public static void Budget()
         {
-            string addbalans;
-            UI.BudgetUI();            
-            while((addbalans = Console.ReadLine()) != "m")
+            PrintHeader("Управление на бюджета");
+            UI.BudgetUI();
+
+            string input;
+            while ((input = Console.ReadLine()) != "m")
             {
-                if (addbalans == "add")
+                if (input == "add")
                 {
-
-                    while (addbalans == "add")
+                    Console.Write("➡️ Въведи сума за добавяне: ");
+                    if (int.TryParse(Console.ReadLine(), out int amount) && amount > 0)
                     {
-                        Console.Write($"Въведи число за да добавиш в сметката си:");
-                        int number = int.Parse(Console.ReadLine());
-                        balans = balans + number;
-
-                        Console.WriteLine($"Вие успешно добавихте {number}лв. в сметката си.");
-                        Console.WriteLine($"Сега разполагате с {balans}лв.");
-                        Console.WriteLine();
-                        Console.WriteLine($"Въведи {"add"} за да добавиш пари в сметката си.");
-                        Console.WriteLine($"Въведи {"m"} за да се върнеш в Menu-то.");
-                        addbalans = Console.ReadLine();
-                        if (addbalans == "add")
-                        {
-                            continue;
-                        }
-                        else if (addbalans == "m")
-                        {
-                            UI.SelectOption();
-                            break;
-
-                        }
-                        else
-                        {
-                            Console.WriteLine($"Въвели сле грешна команда моля въведете {"add"}  или {"m"}");
-                        }
+                        balans += amount;
+                        Console.WriteLine($"✅ Добавихте {amount} лв. Текущ баланс: {balans} лв.");
                     }
-                    break;
+                    else
+                    {
+                        Console.WriteLine("❌ Невалидна сума.");
+                    }
+                    Console.WriteLine("➡️ Въведете \"add\" за добавяне на още средства или \"m\" за менюто.");
                 }
-                else if (addbalans == "balans")
+                else if (input == "balans")
                 {
-                    Console.WriteLine($"Вашия баланс е {balans}лв");
-                    Console.WriteLine($"Въведи {"m"} за да се върнеш в Menu-то.");
-                    while (addbalans == "m")
-                    {
-                        addbalans = Console.ReadLine();
-                        if (addbalans == "m")
-                        {
-                            UI.SelectOption();
-                        }
-                        else
-                        {
-                            Console.WriteLine("Въвели сте грешна команда");
-                        }
-                    }
-
-
-                }               
+                    Console.WriteLine($"💰 Текущ баланс: {balans} лв.");
+                    Console.WriteLine("➡️ Въведете \"m\" за менюто.");
+                }
                 else
                 {
-                    Console.WriteLine($"Въвели сле грешна команда моля въведете {"add"}, {"balans"}  или {"m"}");
-                    continue;
+                    Console.WriteLine("❌ Невалидна команда. Използвайте \"add\", \"balans\" или \"m\".");
                 }
             }
-            if (addbalans == "m")
-            {
-                UI.SelectOption();
-            }
 
-
-
-
+            UI.SelectOption();
         }
+
         public static void ShowAvailability()
         {
-            Console.Clear();
-            Console.Write("Въведи събитие:");
+            PrintHeader("Проверка на наличност");
+            Console.Write("➡️ Въведи име на събитие: ");
             string eventName = Console.ReadLine();
-            foreach(var e in Data.events)
+
+            bool found = false;
+            foreach (var e in Data.events)
             {
-                if(e.Name == eventName)
+                if (e.Name.Equals(eventName, StringComparison.OrdinalIgnoreCase))
                 {
-                    Console.WriteLine($"Броя на билетите за {e.Name} са {e.TicketsAvailable} и цената за един билет е {e.Price}лв.");
+                    Console.WriteLine($"🎟️ Брой билети: {e.TicketsAvailable}, Цена: {e.Price} лв.");
+                    found = true;
+                    break;
                 }
             }
+
+            if (!found)
+            {
+                Console.WriteLine("❌ Не е намерено такова събитие.");
+            }
+
+            PrintFooter();
         }
 
         public static void CloseProgram()
         {
             Console.WriteLine("Затваряне на програмата...");
-            Environment.Exit(0); // Спира приложението веднага
+            Environment.Exit(0);
+        }
+
+        // ✅ Помощни методи за по-ясен интерфейс
+        private static void PrintHeader(string title)
+        {
+            Console.Clear();
+            Console.WriteLine(new string('=', 40));
+            Console.WriteLine($"🔷 {title.ToUpper()} 🔷");
+            Console.WriteLine(new string('=', 40));
+        }
+
+        private static void PrintFooter()
+        {
+            Console.WriteLine(new string('=', 40));
+            Console.WriteLine($"➡️ Натиснете {"m"} за връщане в менюто...");
+            Console.ReadLine();
+            UI.SelectOption();
         }
     }
 }
-
-
-       
