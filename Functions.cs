@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Xml.Linq;
+using System.Diagnostics.Contracts;
 
 namespace SportEvents
 {
@@ -30,6 +31,12 @@ namespace SportEvents
 
             Console.Write("➡️ Въведете дата и час (ДД.ММ.ГГГГ ЧЧ:ММ): ");
             DateTime date = DateTime.Parse(Console.ReadLine());
+            while(isDateValid(date) == false) //докато не се въведе валидна дата не може да се продължи
+            {
+                Console.WriteLine("Грешна дата опитай отново:");
+                date = DateTime.Parse(Console.ReadLine());
+                
+            }
 
 
             Console.Write("➡️ Въведете наличен брой билети: ");
@@ -124,7 +131,7 @@ namespace SportEvents
             }
             if (buyticket == "yes" && balans <= res)
             {
-                Console.WriteLine("❌ Нямате достатъчно баланс за да извършите това плащане");
+                Console.WriteLine("❌ Нямате достатъчно баланс за да извършите това плащане. Въведи m за да се върнеш в главното menu:");
             }
             if (buyticket == "m")
             {
@@ -211,20 +218,37 @@ namespace SportEvents
         {
             Console.Clear();
             Console.Write("➡️ Въведи събитие:");
-            string eventName = Console.ReadLine();
-            foreach (var e in Data.events)
+            string eventName;
+            while ((eventName = Console.ReadLine()) != "m") 
             {
-                if (e.Name == eventName)
+
+                foreach (var e in Data.events)
                 {
-                    Console.WriteLine($"🎟️ Броя на билетите за {e.Name} са {e.TicketsAvailable} и цената за един билет е {e.Price}лв.");
+                    if (e.Name == eventName)
+                    {
+                        Console.WriteLine($"🎟️ Броя на билетите за {e.Name} са {e.TicketsAvailable} и цената за един билет е {e.Price}лв.");
+                    }
+                     
                 }
+                Console.WriteLine("Грешно име върнете се в менюто като натиснете м или пробвайте пак:");
             }
+            
         }
 
         public static void CloseProgram()
         {
             Console.WriteLine("Затваряне на програмата...");
             Environment.Exit(0); // Спира приложението веднага
+        }
+
+        private static bool isDateValid(DateTime date) //Проверява дали датата е настояща
+        {
+            DateTime realDate = DateTime.Now;
+            if (date <= realDate)
+            {
+                return false;
+            }
+            else { return true; }
         }
     }
 }

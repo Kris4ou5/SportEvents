@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.Metrics;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SportEvents
 {
@@ -20,6 +21,7 @@ namespace SportEvents
             // Четене на потребителски вход докато не бъде въведено "0" (изход от програмата)
             while ((input = Console.ReadLine()) != "0")
             {
+              
                 // Изпълняване на действие според избраната опция от менюто
                 switch (input)
                 {
@@ -37,19 +39,18 @@ namespace SportEvents
                         break;
                     case "5": // Показване на текущия бюджет (приходи от продажба на билети)
                         Functions.Budget();
-                        break;
-                    case "0": // Изход от програмата (не е нужно действие, while ще приключи)
-                        break;
+                        break;                  
                     case "m": // Повторно показване на менюто с опциите
                         UI.SelectOption();
                         break;
                     default:
                         // При невалидна опция се показва съобщение и вероятно затваря програмата
                         Console.WriteLine("Напиши цифра от 1-5 или 0 за да продължиш или затвориш");
-                        Functions.CloseProgram();
                         break;
                 }
             }
+            Functions.CloseProgram(); //Затваря програмата тъй като щом кода излиза от while-a значи е подадено 0 като инпут
+
         }
     }
 }
