@@ -18,13 +18,13 @@ namespace SportEvents
             Console.ResetColor();
 
             // Изброяване на опциите
-            Console.WriteLine("  1️⃣  ➤ Добавяне на ново спортно събитие");
-            Console.WriteLine("  2️⃣  ➤ Продажба на билети за събитие");
-            Console.WriteLine("  3️⃣  ➤ Проверка на наличността на билети");
-            Console.WriteLine("  4️⃣  ➤ Справка за всички спортни събития");
-            Console.WriteLine("  5️⃣  ➤ 💰 Бюджет");
-            Console.WriteLine("  m️⃣  ➤ 📜 Меню");
-            Console.WriteLine("  0️⃣  ➤ ❌ Изход");
+            Console.WriteLine("  1️  ➤ Добавяне на ново спортно събитие");
+            Console.WriteLine("  2️  ➤ Продажба на билети за събитие");
+            Console.WriteLine("  3️  ➤ Проверка на наличността на билети");
+            Console.WriteLine("  4️  ➤ Справка за всички спортни събития");
+            Console.WriteLine("  5️  ➤ 💰 Бюджет");
+            Console.WriteLine("  m️  ➤ 📜 Меню");
+            Console.WriteLine("  0️  ➤ ❌ Изход");
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("╚════════════════════════════════════════════════════════╝");
