@@ -3,14 +3,18 @@ using System.Collections.Generic;
 
 namespace SportEvents
 {
+    // Клас, съдържащ основните функции за работа със спортни събития
     internal class Functions
     {
-        private static decimal balans; // Проследяване на баланса
+        // Променлива за проследяване на потребителския баланс
+        private static decimal balans;
 
+        // Метод за добавяне на ново събитие
         public static void AddEvent()
         {
             PrintHeader("Добавяне на ново събитие");
 
+            // Въвеждане на име, местоположение, дата, брой билети и цена на събитието
             Console.Write("➡️ Въведете име на събитието: ");
             string name = Console.ReadLine();
 
@@ -38,19 +42,22 @@ namespace SportEvents
                 Console.Write("❌ Моля, въведете положително число: ");
             }
 
+            // Създаване на нов обект от тип Events и добавяне в списъка
             Events newEvent = new Events(name, location, date, tickets, price);
             Data.events.Add(newEvent);
-            Data.Save();
+            Data.Save(); // Запазване на данните
 
             Console.WriteLine($"✅ Събитието \"{name}\" е успешно добавено!");
             PrintFooter();
         }
 
+        // Метод за покупка на билети
         public static void BuyTickets()
         {
             PrintHeader("Купуване на билети");
 
-            UI.BuyTickets(Data.events);
+            UI.BuyTickets(Data.events); // Показване на наличните събития
+
             Console.Write("➡️ Изберете номер на събитието: ");
             int index;
             while (!int.TryParse(Console.ReadLine(), out index) || index <= 0 || index > Data.events.Count)
@@ -65,11 +72,13 @@ namespace SportEvents
                 Console.Write("❌ Грешен брой. Опитайте пак: ");
             }
 
+            // Изчисляване на крайната цена и потвърждение на покупката
             CalculatePrice(countTic, index);
-            Data.Save();
+            Data.Save(); // Запазване на промените
             PrintFooter();
         }
 
+        // Метод за изчисляване на крайната цена и стартиране на процеса по потвърждение
         private static void CalculatePrice(int countTic, int index)
         {
             decimal total = countTic * Data.events[index - 1].Price;
@@ -77,6 +86,7 @@ namespace SportEvents
             ConfirmPurchase(total, countTic, index);
         }
 
+        // Потвърждение на покупката и обновяване на баланса и наличността на билетите
         public static void ConfirmPurchase(decimal totalPrice, int ticketCount, int index)
         {
             Console.WriteLine("➡️ Въведете \"yes\" за потвърждение или \"m\" за връщане в менюто:");
@@ -84,7 +94,7 @@ namespace SportEvents
 
             if (input == "yes")
             {
-                if (balans >= totalPrice)
+                if (balans >= totalPrice) // Проверка дали има достатъчно баланс
                 {
                     balans -= totalPrice;
                     Data.events[index - 1].TicketsAvailable -= ticketCount;
@@ -99,7 +109,7 @@ namespace SportEvents
             }
             else if (input == "m")
             {
-                UI.SelectOption();
+                UI.SelectOption(); // Връщане в менюто
             }
             else
             {
@@ -107,15 +117,16 @@ namespace SportEvents
             }
         }
 
+        // Метод за управление на бюджета
         public static void Budget()
         {
             PrintHeader("Управление на бюджета");
-            UI.BudgetUI();
+            UI.BudgetUI(); // Показва възможностите за бюджетно управление
 
             string input;
             while ((input = Console.ReadLine()) != "m")
             {
-                if (input == "add")
+                if (input == "add") // Добавяне на пари в баланса
                 {
                     Console.Write("➡️ Въведи сума за добавяне: ");
                     if (int.TryParse(Console.ReadLine(), out int amount) && amount > 0)
@@ -129,7 +140,7 @@ namespace SportEvents
                     }
                     Console.WriteLine("➡️ Въведете \"add\" за добавяне на още средства или \"m\" за менюто.");
                 }
-                else if (input == "balans")
+                else if (input == "balans") // Проверка на текущия баланс
                 {
                     Console.WriteLine($"💰 Текущ баланс: {balans} лв.");
                     Console.WriteLine("➡️ Въведете \"m\" за менюто.");
@@ -140,9 +151,10 @@ namespace SportEvents
                 }
             }
 
-            UI.SelectOption();
+            UI.SelectOption(); // Връщане в менюто
         }
 
+        // Метод за проверка на наличните билети за конкретно събитие
         public static void ShowAvailability()
         {
             PrintHeader("Проверка на наличност");
@@ -150,7 +162,7 @@ namespace SportEvents
             string eventName = Console.ReadLine();
 
             bool found = false;
-            foreach (var e in Data.events)
+            foreach (var e in Data.events) // Търсене на събитието
             {
                 if (e.Name.Equals(eventName, StringComparison.OrdinalIgnoreCase))
                 {
@@ -168,13 +180,14 @@ namespace SportEvents
             PrintFooter();
         }
 
+        // Метод за затваряне на програмата
         public static void CloseProgram()
         {
             Console.WriteLine("Затваряне на програмата...");
             Environment.Exit(0);
         }
 
-        // ✅ Помощни методи за по-ясен интерфейс
+        // Помощен метод за показване на заглавие
         private static void PrintHeader(string title)
         {
             Console.Clear();
@@ -183,6 +196,7 @@ namespace SportEvents
             Console.WriteLine(new string('=', 40));
         }
 
+        // Помощен метод за показване на подканващ текст и връщане в менюто
         private static void PrintFooter()
         {
             Console.WriteLine(new string('=', 40));
