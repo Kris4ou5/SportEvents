@@ -3,8 +3,11 @@ using System.Collections.Generic;
 
 namespace SportEvents
 {
+   
     internal class UI
     {
+     
+        /// Основно меню с избор на опции от потребителя.
         public static void SelectOption()
         {
             Console.Clear();
@@ -14,6 +17,7 @@ namespace SportEvents
             Console.WriteLine("╠════════════════════════════════════════════════════════╣");
             Console.ResetColor();
 
+            // Изброяване на опциите
             Console.WriteLine("  1️⃣  ➤ Добавяне на ново спортно събитие");
             Console.WriteLine("  2️⃣  ➤ Продажба на билети за събитие");
             Console.WriteLine("  3️⃣  ➤ Проверка на наличността на билети");
@@ -26,9 +30,12 @@ namespace SportEvents
             Console.WriteLine("╚════════════════════════════════════════════════════════╝");
             Console.ResetColor();
 
-            Console.Write("👉 Изберете опция: ");
+            Console.Write("👉 Изберете опция: "); // Подканване към потребителя
         }
 
+   
+        /// Показва пълен списък с всички налични спортни събития.
+        /// Ако няма събития - извежда съобщение.
         public static void ShowAllEvents(List<Events> events)
         {
             Console.Clear();
@@ -44,6 +51,7 @@ namespace SportEvents
             Console.WriteLine("📋 Списък с всички спортни събития:");
             Console.ResetColor();
 
+            // Обхождане и показване на информация за всяко събитие
             for (int i = 0; i < events.Count; i++)
             {
                 Console.WriteLine($"🔹 Събитие #{i + 1}");
@@ -52,6 +60,7 @@ namespace SportEvents
             }
         }
 
+        /// Показва списък с наличните събития за закупуване на билети.
         public static void BuyTickets(List<Events> events)
         {
             Console.Clear();
@@ -67,17 +76,19 @@ namespace SportEvents
             Console.WriteLine("🎟️ Избери събитие, за което искаш да купиш билети:");
             Console.ResetColor();
 
+            // Показване само на имената на събитията с пореден номер
             for (int i = 0; i < events.Count; i++)
             {
                 Console.WriteLine($"  {i + 1}. {events[i].Name}");
             }
 
-            Console.Write("\n👉 Въведи номер на събитието: ");
-           
+            Console.Write("\n👉 Въведи номер на събитието: "); // Потребителят въвежда избрания номер
         }
 
+        /// Показва пълната информация за дадено събитие.
         public static void ShowEventInfo(Events eventi)
         {
+            // Извеждане на всички ключови свойства на обекта Events
             Console.WriteLine($"   🆔 ID: {eventi.eventID}");
             Console.WriteLine($"   📛 Име: {eventi.Name}");
             Console.WriteLine($"   📍 Местоположение: {eventi.Location}");
@@ -86,6 +97,7 @@ namespace SportEvents
             Console.WriteLine($"   💸 Цена: {eventi.Price} лв.");
         }
 
+        /// Показва опциите за управление на бюджета (добавяне на пари и проверка на баланс).
         public static void BudgetUI()
         {
             Console.Clear();
@@ -93,6 +105,7 @@ namespace SportEvents
             Console.WriteLine("💰 Управление на бюджета:");
             Console.ResetColor();
 
+            // Подсказване какви команди може да използва потребителят
             Console.WriteLine("  ➕ Въведи 'add' за да добавиш пари в сметката си.");
             Console.WriteLine("  📊 Въведи 'balans' за да видиш с колко пари разполагаш.");
             Console.WriteLine("  🔙 Въведи 'm' за да се върнеш в менюто.");
