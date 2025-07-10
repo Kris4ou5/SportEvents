@@ -103,12 +103,12 @@ namespace SportEvents
                 countTic = int.Parse(Console.ReadLine());
             }
             Console.Clear();
-            CalculatePrice(countTic, index);
+            FinalizePayment(countTic, index);
             Data.Save();
 
         }
 
-        private static void CalculatePrice(int countTic, int index) // метода изчислява цената и потвърждава покупката 
+        private static void FinalizePayment(int countTic, int index) // метода изчислява цената и потвърждава покупката 
         {
             decimal res = countTic * Data.events[index - 1].Price;
             Console.WriteLine($"💰 Цената за {countTic} билета е {res}лв.");
