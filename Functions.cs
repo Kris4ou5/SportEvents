@@ -17,18 +17,19 @@ namespace SportEvents
     {
 
         private static decimal balans; //тази променлива е за следене на баланса
+        // Добавя ново спортно събитие към списъка
         public static void AddEvent()
         {
 
             Console.Clear();
             Console.WriteLine("========== ДОБАВЯНЕ НА НОВО СЪБИТИЕ ==========");
-
+            //Добавяне на име на новото събитие
             Console.Write("➡️ Въведете име на събитието: ");
             string name = Console.ReadLine();
-
+            //Добавяне на място на събитието
             Console.Write("➡️ Въведете местоположение: ");
             string location = Console.ReadLine();
-
+            //Добавяне на дата на новото събитие
             Console.Write("➡️ Въведете дата и час (ДД.ММ.ГГГГ ЧЧ:ММ): ");
             DateTime date = DateTime.Parse(Console.ReadLine());
             while(isDateValid(date) == false) //докато не се въведе валидна дата не може да се продължи
@@ -37,7 +38,7 @@ namespace SportEvents
                 date = DateTime.Parse(Console.ReadLine());
                 
             }
-
+            //Добавяне на брой билети на събитието
 
             Console.Write("➡️ Въведете наличен брой билети: ");
             int tickets = int.Parse(Console.ReadLine());
@@ -54,7 +55,7 @@ namespace SportEvents
             }
 
 
-
+            //Добавяне на брой билети за събитието
             Console.Write("➡️ Въведете цена на билет (в ЛВ): ");
             decimal price = decimal.Parse(Console.ReadLine());
             while (true)
@@ -79,8 +80,7 @@ namespace SportEvents
         }
 
 
-
-
+        // Процес по закупуване на билети
         public static void BuyTickets()
         {
             Console.Clear();
@@ -91,6 +91,7 @@ namespace SportEvents
 
             while (index == 0 || index > Data.events.Count) // проверява входа
             {
+                // Проверка за валиден номер на събитие
                 Console.Write("❌ Грешен номер опитай пак:");
                 index = int.Parse(Console.ReadLine());
             }
@@ -124,7 +125,10 @@ namespace SportEvents
             Data.events[index - 1].TicketsAvailable = Data.events[index - 1].TicketsAvailable - countTic; // изчислява как ще се промени броя на билетите при покупка и го запазва
 
         }
-        public static void ConfirmPurchase(decimal res, int index) // оправих го както ми каза
+
+
+        // Потвърждава плащането и актуализира баланса
+        public static void ConfirmPurchase(decimal res, int index) 
         {
 
             Console.WriteLine($"➡️ Въведи {"yes"} за да подвърдиш плащането или {"m"} за да се върнеш в Menu-то");
@@ -149,6 +153,7 @@ namespace SportEvents
 
         }
 
+        // Управление на бюджета - добавяне на пари и проверка на баланса
         public static void Budget()
         {
             string addbalans;
@@ -222,6 +227,8 @@ namespace SportEvents
 
 
         }
+
+        // Показва броя на наличните билети за дадено събитие
         public static void ShowAvailability()
         {
             Console.Clear();
