@@ -29,7 +29,7 @@ namespace SportEvents
             //Добавяне на място на събитието
             Console.Write("➡️ Въведете местоположение: ");
             string location = Console.ReadLine();
-            //Добавяне на дата на новото събитие
+            ///Добавяне на дата на новото събитие
             Console.Write("➡️ Въведете дата и час (ДД.ММ.ГГГГ ЧЧ:ММ): ");
             DateTime date = DateTime.Parse(Console.ReadLine());
             while(isDateValid(date) == false) //докато не се въведе валидна дата не може да се продължи

@@ -9,7 +9,6 @@ namespace SportEvents
         {
             // Задаване на кодировка на конзолата, за да се поддържат символи на кирилица
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-
             // Показване на меню с наличните опции
             UI.SelectOption();
 
