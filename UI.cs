@@ -58,6 +58,8 @@ namespace SportEvents
                 ShowEventInfo(events[i]);
                 Console.WriteLine("──────────────────────────────────────────────");
             }
+
+            Console.WriteLine("Въведи м за да се върнеш в менюто:");
         }
 
         // Показва списък с наличните събития за закупуване на билети.

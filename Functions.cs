@@ -234,6 +234,7 @@ namespace SportEvents
             Console.Clear();
             Console.Write("➡️ Въведи събитие:");
             string eventName;
+            bool match = false;
             while ((eventName = Console.ReadLine()) != "m") 
             {
 
@@ -242,10 +243,25 @@ namespace SportEvents
                     if (e.Name == eventName)
                     {
                         Console.WriteLine($"🎟️ Броя на билетите за {e.Name} са {e.TicketsAvailable} и цената за един билет е {e.Price}лв.");
+                         match = true;
+                        
                     }
                      
                 }
-                Console.WriteLine("Грешно име върнете се в менюто като натиснете м или пробвайте пак:");
+                if (match == false)
+                {
+                    Console.WriteLine("Грешно име върнете се в менюто като натиснете м или пробвайте пак:");
+
+
+                }
+                else {
+                    Console.WriteLine("Проверете друго събитие или въведете м за да се върнете в менюто:");
+                }
+                
+            }
+            if(eventName == "m")
+            {
+                UI.SelectOption();
             }
             
         }
