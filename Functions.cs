@@ -95,16 +95,24 @@ namespace SportEvents
                 index = int.Parse(Console.ReadLine());
             }
             Console.Clear();
-            Console.Write("➡️ Изберете брой билети: ");
-            int countTic = int.Parse(Console.ReadLine());
-            while (countTic == 0 || countTic > Data.events[index - 1].TicketsAvailable) // проверява входа отново
+            if (Data.events[index - 1].TicketsAvailable > 0) // Проверява ако има останал брой билети за това събитие
             {
-                Console.Write("❌ Грешен брой опитай пак:");
-                countTic = int.Parse(Console.ReadLine());
+                Console.Write("➡️ Изберете брой билети: ");
+                int countTic = int.Parse(Console.ReadLine());
+                while (countTic == 0 || countTic > Data.events[index - 1].TicketsAvailable) // проверява входа отново
+                {
+                    Console.Write("❌ Грешен брой опитай пак:");
+                    countTic = int.Parse(Console.ReadLine());
+                }
+                Console.Clear();
+                FinalizePayment(countTic, index);
+                Data.Save();
             }
-            Console.Clear();
-            FinalizePayment(countTic, index);
-            Data.Save();
+            else
+            {
+                Console.WriteLine("Билетите за това събитие са изчерпани. Въведете m за да се върнете в менюто или 0 за да затворите програмата:"); // ако няма билети изписва това
+            }
+
 
         }
 
