@@ -122,7 +122,11 @@ namespace SportEvents
             decimal res = countTic * Data.events[index - 1].Price;
             Console.WriteLine($"💰 Цената за {countTic} билета е {res}лв.");
             ConfirmPurchase(res, index);
-            Data.events[index - 1].TicketsAvailable = Data.events[index - 1].TicketsAvailable - countTic; // изчислява как ще се промени броя на билетите при покупка и го запазва
+            if(balans >= res)
+            {
+                Data.events[index - 1].TicketsAvailable = Data.events[index - 1].TicketsAvailable - countTic;
+            }
+             // изчислява как ще се промени броя на билетите при покупка и го запазва
 
         }
 
